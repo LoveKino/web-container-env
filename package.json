@@ -24,7 +24,10 @@
     },
     "homepage": "https://github.com/LoveKino/web-container-env#readme",
     "dependencies": {
-        "electron-prebuilt": "^1.2.7",
+        "del": "^2.2.1",
+        "mz": "^2.4.0"
+    },
+    "link_dependencies": {
         "general-bridge": "~0.0.1"
     }
 }

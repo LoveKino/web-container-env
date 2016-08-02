@@ -13,6 +13,8 @@ module.exports = (call) => {
         readdir: reflect(call, 'fs.readdir'),
         mkdir: reflect(call, 'fs.mkdir'),
         rmdir: reflect(call, 'fs.rmdir'),
-        del: reflect(call, 'fs.del')
+        del: reflect(call, 'fs.del'),
+        existsFile: reflect(call, 'fs.existsFile'),
+        existsDir: reflect(call, 'fs.existsDir')
     };
 };

@@ -4,6 +4,8 @@ let fs = require('mz/fs');
 
 let del = require('del');
 
+let mkdirp = require('mkdirp');
+
 let existsFile = (filePath) => {
     return new Promise((resolve) => {
         fs.stat(filePath).then((statObj) => {
@@ -30,6 +32,7 @@ module.exports = {
     readdir: fs.readdir,
     mkdir: fs.mkdir,
     rmdir: fs.rmdir,
+    mkdirp,
     del,
     existsFile,
     existsDir

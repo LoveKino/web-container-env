@@ -25,6 +25,7 @@
     "homepage": "https://github.com/LoveKino/web-container-env#readme",
     "dependencies": {
         "del": "^2.2.1",
+        "mkdirp": "^0.5.1",
         "mz": "^2.4.0"
     },
     "link_dependencies": {

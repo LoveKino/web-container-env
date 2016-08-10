@@ -1,7 +1,7 @@
 'use strict';
 
 let reflect = (call, path) => {
-    return function () {
+    return function() {
         return call(path, Array.prototype.slice.call(arguments));
     };
 };
@@ -15,6 +15,7 @@ module.exports = (call) => {
         rmdir: reflect(call, 'fs.rmdir'),
         del: reflect(call, 'fs.del'),
         existsFile: reflect(call, 'fs.existsFile'),
-        existsDir: reflect(call, 'fs.existsDir')
+        existsDir: reflect(call, 'fs.existsDir'),
+        mkdirp: reflect(call, 'fs.mkdirp')
     };
 };

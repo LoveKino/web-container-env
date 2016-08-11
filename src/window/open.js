@@ -9,6 +9,7 @@ let defWindwoOpts = {
     height: 600
 };
 
+/*
 let defMobileOpts = {
     screenPosition: 'mobile',
     screenSize: {
@@ -30,6 +31,7 @@ let defMobileOpts = {
         y: 0
     }
 };
+*/
 
 /**
  * opts
@@ -37,7 +39,7 @@ let defMobileOpts = {
  *      windowOpts
  *      url
  *      loadURLOpts,
- *      injectScript
+ *      injectScript,
  */
 module.exports = (opts = {}) => {
     let windowOpts = merge(defWindwoOpts, opts.windowOpts);
@@ -50,9 +52,10 @@ module.exports = (opts = {}) => {
     let webContents = windowFrame.webContents;
 
     webContents.loadURL(opts.url, opts.loadURLOpts);
-    webContents.enableDeviceEmulation(merge(defMobileOpts, opts.mobileOpts));
 
-    webContents.openDevTools();
+    // webContents.enableDeviceEmulation(merge(defMobileOpts, opts.mobileOpts));
+
+    // webContents.openDevTools();
 
     return windowFrame;
 };

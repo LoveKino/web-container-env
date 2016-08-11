@@ -1,13 +1,15 @@
 'use strict';
 
 let {
-    app
+    app, Menu
 } = require('electron'),
     open = require('./open'), {
         generateInjectFile, removeInjectFile
     } = require('../dynamicInject');
 
 let back = require('../bridge');
+
+let createDefaultMenu = require('./createDefaultMenu');
 
 let count = 0;
 let genWinId = () => {
@@ -139,6 +141,15 @@ let appReady = () => {
         });
     }
 };
+
+app.on('window-all-closed', function() {
+    app.quit();
+});
+
+app.once('ready', () => {
+    if (Menu.getApplicationMenu()) return;
+    createDefaultMenu();
+});
 
 let cloneMap = (map = {}) => {
     let newMap = {};

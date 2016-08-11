@@ -5,9 +5,9 @@ let {
 } = require('electron'),
     open = require('./open'), {
         generateInjectFile, removeInjectFile
-    } = require('../dynamicInject'), {
-        back
-    } = require('../bridge');
+    } = require('../dynamicInject');
+
+let back = require('../bridge');
 
 let count = 0;
 let genWinId = () => {

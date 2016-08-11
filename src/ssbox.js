@@ -44,8 +44,6 @@ module.exports = ({
                 windowFrame
             } = manager[winId];
             if (windowFrame) {
-                delete manager[winId];
-                // return before window is destroyed
                 setTimeout(() => {
                     windowFrame.close();
                 }, 17);

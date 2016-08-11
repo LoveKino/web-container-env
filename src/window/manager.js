@@ -3,8 +3,9 @@
 let {
     app
 } = require('electron'),
-    open = require('./open'),
-    dynamicInject = require('../dynamicInject'), {
+    open = require('./open'), {
+        generateInjectFile, removeInjectFile
+    } = require('../dynamicInject'), {
         back
     } = require('../bridge');
 
@@ -14,9 +15,10 @@ let genWinId = () => {
 };
 
 let genInjectScript = ({
-    coreJsPath, passData, rootId
+    injectScriptPath, coreJsPath, passData, rootId
 }, winId) => {
-    return dynamicInject({
+    return generateInjectFile({
+        injectScriptPath,
         coreJsPath,
         injectData: {
             winId,
@@ -71,23 +73,26 @@ module.exports = () => {
             } = back(winId, sandbox, sender(windowFrame.webContents));
 
             manager[winId] = {
-                windowFrame, winId, call
+                windowFrame, winId, call, injectScript
             };
 
             onWindow(windowFrame, winId, opts);
 
             return {
-                winId,
                 rootId: opts.rootId,
+                winId,
                 call,
-                windowFrame
+                windowFrame,
+                injectScript
             };
         });
     };
 
     let onWindow = (windowFrame, winId, opts) => {
         windowFrame.on('close', () => {
+            let item = manager[winId];
             delete manager[winId];
+            return item && removeInjectFile(item.injectScript);
         });
 
         // new window event

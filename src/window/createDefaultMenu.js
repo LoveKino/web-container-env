@@ -1,5 +1,5 @@
 const {
-    Menu, shell, app
+    Menu, app
 } = require('electron');
 
 const template = [{
@@ -74,32 +74,6 @@ const template = [{
         label: 'Close',
         accelerator: 'CmdOrCtrl+W',
         role: 'close'
-    }]
-}, {
-    label: 'Help',
-    role: 'help',
-    submenu: [{
-        label: 'Learn More',
-        click() {
-            shell.openExternal('http://electron.atom.io');
-        }
-    }, {
-        label: 'Documentation',
-        click() {
-            shell.openExternal(
-                `https://github.com/electron/electron/tree/v${process.versions.electron}/docs#readme`
-            );
-        }
-    }, {
-        label: 'Community Discussions',
-        click() {
-            shell.openExternal('https://discuss.atom.io/c/electron');
-        }
-    }, {
-        label: 'Search Issues',
-        click() {
-            shell.openExternal('https://github.com/electron/electron/issues');
-        }
     }]
 }];
 

@@ -81,11 +81,6 @@ if (process.platform === 'darwin') {
     template.unshift({
         label: 'Freekite',
         submenu: [{
-            label: 'About Freekite',
-            role: 'about'
-        }, {
-            type: 'separator'
-        }, {
             label: 'Services',
             role: 'services',
             submenu: []

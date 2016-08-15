@@ -42,7 +42,7 @@ module.exports = ({
         closeWindow: (winId) => {
             let {
                 windowFrame
-            } = manager[winId];
+            } = manager[winId] || {};
             if (windowFrame) {
                 setTimeout(() => {
                     windowFrame.close();

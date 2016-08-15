@@ -40,6 +40,7 @@ let defMobileOpts = {
  *      url
  *      loadURLOpts,
  *      injectScript,
+ *      openDev
  */
 module.exports = (opts = {}) => {
     let windowOpts = merge(defWindwoOpts, opts.windowOpts);
@@ -55,7 +56,9 @@ module.exports = (opts = {}) => {
 
     // webContents.enableDeviceEmulation(merge(defMobileOpts, opts.mobileOpts));
 
-    // webContents.openDevTools();
+    if (windowOpts.openDev) {
+        webContents.openDevTools();
+    }
 
     return windowFrame;
 };

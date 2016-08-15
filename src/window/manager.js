@@ -49,8 +49,11 @@ module.exports = () => {
             url,
             extraHeaders,
             channelName,
-            parent
+            parent,
+            openDev
         } = opts;
+
+        if(typeof openDev === 'undefined') openDev = true;
 
         // used to identity a window
         let winId = channelName || genWinId();
@@ -66,7 +69,8 @@ module.exports = () => {
                 },
                 injectScript,
                 windowOpts: {
-                    parent
+                    parent,
+                    openDev
                 }
             });
 

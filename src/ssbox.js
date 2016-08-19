@@ -10,34 +10,37 @@ module.exports = ({
     createWindow,
     manager
 }) => {
+    /**
+     * opts
+     *      callbackChannel
+     */
+    let openWindow = (opts) => {
+        opts.sandbox = sandbox;
+        return createWindow(opts).then(({
+            windowFrame,
+            winId,
+            rootId
+        }) => {
+            let {
+                call
+            } = manager[channelName] || {};
+
+            windowFrame.on('close', () => {
+                // notify control page
+                call && call('onCloseWindow', [{
+                    winId, rootId
+                }]);
+            });
+            return winId;
+        });
+    };
+
     let sandbox = {
         fs: fs,
 
         memory: Memory(),
 
-        /**
-         * opts
-         *      callbackChannel
-         */
-        createWindow: (opts) => {
-            opts.sandbox = sandbox;
-            return createWindow(opts).then(({
-                windowFrame,
-                winId,
-                rootId
-            }) => {
-                windowFrame.on('close', () => {
-                    let {
-                        call
-                    } = manager[channelName] || {};
-                    // notify control page
-                    call && call('onCloseWindow', [{
-                        winId, rootId
-                    }]);
-                });
-                return winId;
-            });
-        },
+        createWindow: openWindow,
 
         closeWindow: (winId) => {
             let {

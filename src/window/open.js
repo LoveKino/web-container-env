@@ -52,7 +52,9 @@ module.exports = (opts = {}) => {
 
     let webContents = windowFrame.webContents;
 
-    webContents.loadURL(opts.url, opts.loadURLOpts);
+    if (opts.url) {
+        webContents.loadURL(opts.url, opts.loadURLOpts);
+    }
 
     // webContents.enableDeviceEmulation(merge(defMobileOpts, opts.mobileOpts));
 

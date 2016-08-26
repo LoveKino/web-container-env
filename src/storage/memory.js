@@ -7,6 +7,9 @@ module.exports = () => {
         set: (key, value) => {
             map[key] = value;
         },
-        get: (key) => map[key]
+        get: (key) => map[key],
+        remove: (key) => {
+            delete map[key];
+        }
     };
 };

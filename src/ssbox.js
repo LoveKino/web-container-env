@@ -1,7 +1,8 @@
 'use strict';
 
 let fs = require('./storage/fs'),
-    Memory = require('./storage/memory');
+    Memory = require('./storage/memory'),
+    WinMemory = require('./storage/winMemory');
 
 let log = console.log; // eslint-disable-line
 
@@ -10,6 +11,8 @@ module.exports = ({
     createWindow,
     manager
 }) => {
+
+    let winMemory = WinMemory();
     /**
      * opts
      *      callbackChannel
@@ -30,6 +33,8 @@ module.exports = ({
                 call && call('onCloseWindow', [{
                     winId, rootId
                 }]);
+                // clear memory
+                winMemory.removeWin(rootId);
             });
             return winId;
         });
@@ -39,6 +44,8 @@ module.exports = ({
         fs: fs,
 
         memory: Memory(),
+
+        winMemory,
 
         createWindow: openWindow,
 

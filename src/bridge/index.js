@@ -7,19 +7,18 @@
  */
 
 let {
-    back
+    pc
 } = require('general-bridge');
 
 let {
     ipcMain
 } = require('electron');
 
-let listen = (channel, handle) => {
-    ipcMain.on(channel, (event, arg) => {
-        handle(arg);
-    });
-};
-
 module.exports = (channelName, sandbox = {}, send) => {
-    return back(channelName, sandbox, listen, send);
+    let channelSend = (data) => send(channelName, data);
+    return pc((handler) => {
+        ipcMain.on(channelName, (event, arg) => {
+            handler(arg, channelSend);
+        });
+    }, channelSend, sandbox);
 };

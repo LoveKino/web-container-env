@@ -2,10 +2,11 @@
 
 let {
     app, Menu
-} = require('electron'),
-    open = require('./open'), {
-        generateInjectFile, removeInjectFile
-    } = require('../dynamicInject');
+} = require('electron');
+let open = require('./open');
+let {
+    generateInjectFile, removeInjectFile
+} = require('../dynamicInject');
 
 let back = require('../bridge');
 
@@ -53,7 +54,7 @@ module.exports = () => {
             openDev
         } = opts;
 
-        if(typeof openDev === 'undefined') openDev = true;
+        if (typeof openDev === 'undefined') openDev = true;
 
         // used to identity a window
         let winId = channelName || genWinId();
@@ -74,9 +75,7 @@ module.exports = () => {
                 }
             });
 
-            let {
-                call
-            } = back(winId, sandbox, sender(windowFrame.webContents));
+            let call = back(winId, sandbox, sender(windowFrame.webContents));
 
             manager[winId] = {
                 windowFrame, winId, call, injectScript

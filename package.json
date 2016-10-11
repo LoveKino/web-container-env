@@ -1,34 +1,32 @@
 {
-    "name": "web-container-env",
-    "version": "0.0.1",
-    "description": "web ui container environment",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/LoveKino/web-container-env.git"
-    },
-    "keywords": [
-        "web",
-        "ui",
-        "container",
-        "env",
-        "electron"
-    ],
-    "author": "ddchen",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/LoveKino/web-container-env/issues"
-    },
-    "homepage": "https://github.com/LoveKino/web-container-env#readme",
-    "dependencies": {
-        "del": "^2.2.1",
-        "mkdirp": "^0.5.1",
-        "mz": "^2.4.0"
-    },
-    "link_dependencies": {
-        "general-bridge": "~0.0.1"
-    }
+  "name": "web-container-env",
+  "version": "0.0.1",
+  "description": "web ui container environment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LoveKino/web-container-env.git"
+  },
+  "keywords": [
+    "web",
+    "ui",
+    "container",
+    "env",
+    "electron"
+  ],
+  "author": "ddchen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LoveKino/web-container-env/issues"
+  },
+  "homepage": "https://github.com/LoveKino/web-container-env#readme",
+  "dependencies": {
+    "del": "^2.2.1",
+    "general-bridge": "0.0.1",
+    "mkdirp": "^0.5.1",
+    "mz": "^2.4.0"
+  }
 }

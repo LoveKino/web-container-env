@@ -1,6 +1,6 @@
 {
   "name": "web-container-env",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "web ui container environment",
   "main": "index.js",
   "scripts": {

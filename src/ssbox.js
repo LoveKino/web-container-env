@@ -4,6 +4,10 @@ let fs = require('./storage/fs'),
     Memory = require('./storage/memory'),
     WinMemory = require('./storage/winMemory');
 
+let {
+    mergeMap
+} = require('bolzano');
+
 let log = console.log; // eslint-disable-line
 
 module.exports = ({
@@ -18,7 +22,7 @@ module.exports = ({
      *      callbackChannel
      */
     let openWindow = (opts) => {
-        opts.sandbox = sandbox;
+        opts.sandbox = mergeMap(sandbox, opts.sandbox || {});
         return createWindow(opts).then(({
             windowFrame,
             winId,

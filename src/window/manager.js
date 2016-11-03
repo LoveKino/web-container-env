@@ -64,7 +64,7 @@ module.exports = () => {
         opts.rootId = opts.rootId || winId;
 
         return genInjectScript(opts, winId).then((injectScript) => {
-            let windowFrame = open({
+            return open({
                 url: url,
                 loadURLOpts: {
                     extraHeaders
@@ -74,23 +74,23 @@ module.exports = () => {
                     parent,
                     openDev
                 }
+            }).then((windowFrame) => {
+                let call = back(winId, sandbox, sender(windowFrame.webContents));
+
+                manager[winId] = {
+                    windowFrame, winId, call, injectScript
+                };
+
+                onWindow(windowFrame, winId, opts);
+
+                return {
+                    rootId: opts.rootId,
+                    winId,
+                    call,
+                    windowFrame,
+                    injectScript
+                };
             });
-
-            let call = back(winId, sandbox, sender(windowFrame.webContents));
-
-            manager[winId] = {
-                windowFrame, winId, call, injectScript
-            };
-
-            onWindow(windowFrame, winId, opts);
-
-            return {
-                rootId: opts.rootId,
-                winId,
-                call,
-                windowFrame,
-                injectScript
-            };
         });
     };
 

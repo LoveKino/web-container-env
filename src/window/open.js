@@ -4,6 +4,8 @@ let {
     BrowserWindow
 } = require('electron');
 
+let clearLocalData = require('./clearLocalData');
+
 let defWindwoOpts = {
     width: 800,
     height: 600
@@ -52,17 +54,18 @@ module.exports = (opts = {}) => {
 
     let webContents = windowFrame.webContents;
 
-    if (opts.url) {
-        webContents.loadURL(opts.url, opts.loadURLOpts);
-    }
+    // clear local storage first
+    return clearLocalData(webContents.session).then(() => {
+        if (opts.url) {
+            webContents.loadURL(opts.url, opts.loadURLOpts);
+        }
 
-    // webContents.enableDeviceEmulation(merge(defMobileOpts, opts.mobileOpts));
-
-    if (windowOpts.openDev) {
-        webContents.openDevTools();
-    }
-
-    return windowFrame;
+        if (windowOpts.openDev) {
+            webContents.openDevTools();
+        }
+        // webContents.enableDeviceEmulation(merge(defMobileOpts, opts.mobileOpts));
+        return windowFrame;
+    });
 };
 
 let merge = (obj1, obj2 = {}) => {

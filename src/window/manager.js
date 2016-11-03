@@ -3,6 +3,7 @@
 let {
     app, Menu
 } = require('electron');
+let appReady = require('../appReady');
 let open = require('./open');
 let {
     generateInjectFile, removeInjectFile
@@ -131,18 +132,6 @@ module.exports = () => {
         createWindow,
         manager
     };
-};
-
-let appReady = () => {
-    if (app.isReady()) {
-        return Promise.resolve();
-    } else {
-        return new Promise(resolve => {
-            app.on('ready', () => {
-                resolve();
-            });
-        });
-    }
 };
 
 app.on('window-all-closed', function() {

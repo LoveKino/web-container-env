@@ -14,7 +14,7 @@ module.exports = ({
     channelName,
     createWindow,
     manager
-}) => {
+}, prevSandbox = {}) => {
 
     let winMemory = WinMemory();
     /**
@@ -44,7 +44,7 @@ module.exports = ({
         });
     };
 
-    let sandbox = {
+    let sandbox = mergeMap({
         fs: fs,
 
         memory: Memory(),
@@ -70,7 +70,7 @@ module.exports = ({
             } = manager[winId];
             return call(name, params);
         }
-    };
+    }, prevSandbox);
 
     return sandbox;
 };

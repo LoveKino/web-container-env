@@ -12,6 +12,9 @@ let {
 let back = require('../bridge');
 
 let createDefaultMenu = require('./createDefaultMenu');
+let {
+    mergeMap
+} = require('bolzano');
 
 let count = 0;
 let genWinId = () => {
@@ -49,10 +52,11 @@ module.exports = () => {
         let {
             sandbox,
             url,
-            extraHeaders,
+            loadURLOpts,
             channelName,
             parent,
-            openDev
+            openDev,
+            windowOpts = {}
         } = opts;
 
         if (typeof openDev === 'undefined') openDev = true;
@@ -66,14 +70,12 @@ module.exports = () => {
         return genInjectScript(opts, winId).then((injectScript) => {
             return open({
                 url: url,
-                loadURLOpts: {
-                    extraHeaders
-                },
+                loadURLOpts,
                 injectScript,
-                windowOpts: {
+                windowOpts: mergeMap({
                     parent,
                     openDev
-                }
+                }, windowOpts)
             }).then((windowFrame) => {
                 let call = back(winId, sandbox, sender(windowFrame.webContents));
 
